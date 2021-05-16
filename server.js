@@ -6,6 +6,7 @@ const logger = require('./middleware/logger');
 const morgan =  require('morgan');
 dotenv.config({ path:'./config/config.env'});
 const colors =  require('colors');
+const erroHanlder = require('./middleware/error');
 
 configdb();
 const app = express();
@@ -17,6 +18,8 @@ app.use(express.json());
 // app.use(logger);
 
 app.use('/api/v1/bootcamps', bootcamp);
+
+app.use(erroHanlder);
 
 const PORT = process.env.PORT || 5000;
 
